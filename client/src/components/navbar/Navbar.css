@@ -1,0 +1,33 @@
+.navbar-container{
+    width: 400px;
+    background-color: #075fbc;
+    color: #fff;
+    height:100vh;
+}
+.student-details{
+    text-align: center;
+    padding:10px;
+    font-size:24px;
+}
+.student-details>div>img{
+    height:140px;
+    width:150px;
+    border-radius:80px;
+    margin-bottom:20px;
+}
+.navbar-list{
+    margin-left:-40px;
+    list-style-type: none;
+    text-align: center;
+    cursor: pointer;
+}
+.navbar-list>li{
+    padding:10px;
+    margin:15px;
+    font-size:20px;
+}
+
+.navbar-list>li:hover{
+    background-color: #06407d;
+    border-radius: 10px;
+}

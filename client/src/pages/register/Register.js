@@ -1,7 +1,8 @@
-import React from 'react'
+import React from "react";
+import { Header } from "../../components/header/Header";
 
 export const Register = () => {
   return (
-    <div>Register</div>
-  )
-}
+      <Header header={"Register"} />
+  );
+};
