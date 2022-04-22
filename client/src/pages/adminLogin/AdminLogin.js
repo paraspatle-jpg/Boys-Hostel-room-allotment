@@ -1,11 +1,44 @@
-import React from "react";
-import { Header } from "../../components/header/Header";
+import React, { useState } from "react";
 
 export const AdminLogin = () => {
+  const [user, setUser] = useState({ email: "", password: "" });
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setUser((prevState) => {
+      console.log(user);
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
+  const handleClick = () => {};
   return (
     <>
-      <Header header={"AdminLogin"} />
-      
+      <div className="login-container">
+      <div className="header-container">Admin Login</div>
+        <div className="login-form-container">
+          <input
+            onChange={handleChange}
+            name="email"
+            data-aos="fade-left"
+            placeholder="Email"
+            type="text"
+          />
+          <input
+            onChange={handleChange}
+            data-aos="fade-left"
+            placeholder="Password"
+            name="password"
+            type="password"
+          />
+          <span onClick={handleClick} data-aos="fade-down">
+            Submit
+          </span>
+        </div>
+      </div>
     </>
   );
 };

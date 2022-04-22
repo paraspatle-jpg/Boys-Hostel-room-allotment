@@ -1,0 +1,12 @@
+.homepage-container{
+    border-left: 5px solid #075fbc;
+}
+.notice-container{
+    background-color: #075fbc;
+    color: #fff;
+    padding:16px;
+    border-top: 5px solid #fff;
+}
+.notice-container>.visible-content>span{
+    margin:auto;
+}

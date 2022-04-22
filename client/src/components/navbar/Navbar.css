@@ -1,15 +1,18 @@
 .navbar-container{
-    width: 400px;
+    width: 500px;
     background-color: #075fbc;
     color: #fff;
     height:100vh;
+    border-right: 5px solid #fff;
 }
 .student-details{
     text-align: center;
     padding:10px;
-    font-size:24px;
+    font-size:26px;
+    font-weight:bold;
 }
 .student-details>div>img{
+    margin-top:20px;
     height:140px;
     width:150px;
     border-radius:80px;
