@@ -1,9 +1,10 @@
 .navbar-container{
-    width: 500px;
+    width: 310px;
     background-color: #075fbc;
     color: #fff;
     height:100vh;
     border-right: 5px solid #fff;
+    position:fixed;
 }
 .student-details{
     text-align: center;
@@ -31,6 +32,6 @@
 }
 
 .navbar-list>li:hover{
-    background-color: #06407d;
+    background-color: #1f1f1f;
     border-radius: 10px;
 }
