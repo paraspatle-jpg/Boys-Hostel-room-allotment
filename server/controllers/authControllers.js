@@ -37,3 +37,11 @@ module.exports.logout = async (req,res) => {
     res.status(400).json({err:err});
   }
 };
+
+module.exports.getuser = async (req, res) => {
+  try{
+    
+  }catch(err){
+    
+  }
+}

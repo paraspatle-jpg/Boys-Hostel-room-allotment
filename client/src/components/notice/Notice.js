@@ -1,12 +1,19 @@
 import React from "react";
+import { GetNotice } from "./GetNotice";
 import "./Notice.css";
+import axios from "axios";
 
 export const Notice = () => {
   const [toggle, setToggle] = React.useState(false);
+  const [notice, setNotice] = React.useState([]);
   const toggleNotice = () => {
     if (!toggle) {
       setToggle(!toggle);
-      document.getElementById("notice-container").style.height = "100px";
+      axios.get("http://localhost:5000/api/notice").then((response) => {
+        console.log(response.data.notices);
+        setNotice(response.data.notices);
+      });
+      document.getElementById("notice-container").style.height = "200px";
       document.getElementById("toggled-content").style.display = "block";
     } else {
       setToggle(!toggle);
@@ -14,6 +21,7 @@ export const Notice = () => {
       document.getElementById("toggled-content").style.display = "none";
     }
   };
+
   return (
     <div className="notice-container" id="notice-container">
       <div className="visible-content">
@@ -32,9 +40,14 @@ export const Notice = () => {
             />
           </svg>
         </span>
+        {/* //adminonly */}
+        <div>
+        <input className="add-notice-input" type="text" placeholder="Enter the content of the notice.."></input>
+        <div className="post-btn">Post</div>
+        </div>
       </div>
       <div id="toggled-content">
-        Lorem ipsum dolor sit amet, congue<br></br>Paras
+        <GetNotice notice={notice} setNotice={setNotice}/>
       </div>
     </div>
   );

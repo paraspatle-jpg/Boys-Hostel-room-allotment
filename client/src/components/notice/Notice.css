@@ -2,16 +2,20 @@
   background-color: #212121;
   color: #fff;
   padding: 16px;
-  height: 30px;
-  border-top: 5px solid #fff;
-  border-left: 5px solid #fff;
+  height: 33px;
+  /* border-top: 5px solid #fff; */
+  /* border-left: 5px solid #fff; */
+  border-bottom: 1px solid #fff;
   overflow: auto;
   transition: all 0.5s ease;
+}
+.visible-content{
+  display:flex;
+  justify-content: space-between;
 }
 .visible-content > span {
   font-size: 20px;
   font-weight: bold;
-  margin-left: 36vw;
   cursor: pointer;
 }
 svg {
@@ -21,5 +25,38 @@ svg {
   display: none;
   padding: 10px;
   font-size: 20px;
-  margin-left:25px;
+  display:flex;
+  justify-content: space-between;
+}
+
+.delete-btn {
+  text-align: center;
+  width: 80px;
+  padding:3px;
+  background-color: #fff;
+  color: #000;
+  border-radius:30px;
+  cursor: pointer;
+}
+
+.add-notice-input{
+  width:400px;
+  height:20px;
+  padding:5px;
+  border-radius:30px 0 0 30px;
+  border:3px solid #fff;
+}
+.post-btn{
+  display: inline-block;
+  background-color:#075fbc;
+  border-radius:0 30px 30px 0;
+  color: #fff;
+  height:25px;
+  text-align: center;
+  width:50px;
+  padding:7px;
+  cursor: pointer;
+}
+.add-notice-input:focus {
+  outline: none;
 }

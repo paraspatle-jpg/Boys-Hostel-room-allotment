@@ -28,6 +28,9 @@ const UserSchema = new Schema({
   admin: {
     type: "boolean",
   },
+  swapRoom:{
+    type: "number",
+  },
   tokens: [{
     token:{
         type: String,

@@ -1,0 +1,25 @@
+.swapreq-container {
+    background-color: #212121;
+    color: #fff;
+    padding: 16px;
+    height: 30px;
+    /* border-top: 5px solid #fff; */
+    /* border-left: 5px solid #fff; */
+    overflow: auto;
+    transition: all 0.5s ease;
+  }
+  .visible-swap-req-content > span {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  svg {
+    height: 20px;
+  }
+  #toggled-swapreq-content {
+    display: none;
+    padding: 10px;
+    font-size: 20px;
+    margin-left:25px;
+  }
+  

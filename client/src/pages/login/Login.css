@@ -4,10 +4,17 @@
     font-size:28px;
     padding:10px;
     height:40px;
-    border-bottom:6px solid #1f1f1f;
+    /* border-bottom:6px solid #1f1f1f; */
     font-weight:bold;
 }
-
+.welcome-message{
+    text-align: center;
+    background-color: #1f1f1f;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+}
 .login-form-container{
     display:flex;
     flex-direction:column;

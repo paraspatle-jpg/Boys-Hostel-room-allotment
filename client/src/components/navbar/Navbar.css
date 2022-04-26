@@ -3,7 +3,7 @@
     background-color: #075fbc;
     color: #fff;
     height:100vh;
-    border-right: 5px solid #fff;
+    /* border-right: 5px solid #fff; */
     position:fixed;
 }
 .student-details{
