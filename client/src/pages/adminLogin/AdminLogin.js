@@ -19,6 +19,7 @@ export const AdminLogin = () => {
     <>
       <div className="login-container">
       <div className="header-container">Admin Login</div>
+      <div className="welcome-message">Welocme, Please Login Here...</div>
         <div className="login-form-container">
           <input
             onChange={handleChange}

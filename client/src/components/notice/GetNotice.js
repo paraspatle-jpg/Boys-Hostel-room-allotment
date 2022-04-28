@@ -14,7 +14,7 @@ export const GetNotice = ({ notice, setNotice }) => {
 
   return notice.map((notices) => {
     return (
-      <div id="toggled-content">
+      <div className="paras">
         <div>{notices.notice}</div>
         <div
           className="delete-btn"
@@ -26,5 +26,5 @@ export const GetNotice = ({ notice, setNotice }) => {
         </div>
       </div>
     );
-  });
+  })
 };

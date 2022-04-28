@@ -4,6 +4,7 @@ import profile from "../image/profile.jpg";
 import "./Navbar.css";
 
 export const Navbar = () => {
+  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem("user")));
   return (
     <div className="navbar-container">
       <div className="navbar-flex-box-container">
@@ -11,7 +12,8 @@ export const Navbar = () => {
           <div>
             <img src={profile} alt="profile"></img>
           </div>
-          <span className="roll-number">BT20CSE039</span>
+          {user?<span className="roll-number">{user.user.rollno}</span>:null}
+          
         </div>
         <ul className="navbar-list">
           <li>

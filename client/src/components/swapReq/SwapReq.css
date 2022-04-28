@@ -5,7 +5,6 @@
     height: 30px;
     /* border-top: 5px solid #fff; */
     /* border-left: 5px solid #fff; */
-    overflow: auto;
     transition: all 0.5s ease;
   }
   .visible-swap-req-content > span {
@@ -17,9 +16,21 @@
     height: 20px;
   }
   #toggled-swapreq-content {
+    overflow: auto;
     display: none;
     padding: 10px;
     font-size: 20px;
-    margin-left:25px;
+    margin-top:20px;
   }
-  
+  .toggled-swapreq-flex{
+    display:flex;
+    justify-content: space-between;
+  }
+  .accept-swap-btn{
+    background-color: #fff;
+    font-size:18px;
+    padding:7px;
+    border-radius:30px;
+    color: #000;
+    cursor: pointer;
+  }

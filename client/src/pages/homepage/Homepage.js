@@ -2,15 +2,20 @@ import React from "react";
 import { Notice } from "../../components/notice/Notice";
 import { SwapReq } from "../../components/swapReq/SwapReq";
 import { RoomChoosing } from "../../components/roomChoosing/RoomChoosing";
+import { Navigate } from "react-router";
 import "./Homepage.css";
 
 export const Homepage = () => {
+  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem("user")));
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
   return (
     <div className="homepage-container">
       <div className="header-container">Home Page</div>
-      <Notice />
-      <SwapReq />
-      <RoomChoosing/>
+      <Notice user={user} />
+      <SwapReq user={user} />
+      <RoomChoosing user={user} />
     </div>
   );
 };

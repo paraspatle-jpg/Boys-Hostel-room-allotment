@@ -6,7 +6,7 @@
     font-size:20px;
     background-color:#212121;
     color:#fff;
-    height: 40px;
+    height: 30px;
     font-weight:bold;
     transition: all 0.5s;
 }
@@ -64,4 +64,41 @@
     display: inline-block;
     margin:10px;
     border-radius:10px;
+}
+#room-choosing-toggled-content{
+    display: none;
+    margin-top:20px;
+}
+
+.getRoomOwners-flex-container{
+    display: flex;
+    font-weight:normal;
+    font-size:18px;
+    margin:10px;
+    justify-content: space-between;
+}
+.swap-request-button{
+    cursor:pointer;
+    background-color: #fff;
+    color:#000;
+    border-radius:30px;
+    padding:10px;
+}
+
+.room-space-left-container{
+    display: flex;
+    justify-content: space-between;
+    font-weight:normal;
+    font-size:18px;
+}
+.grab-seat-button{
+    cursor:pointer;
+    background-color: #075fbc;
+    width:110px;
+    text-align: center;
+    color:#fff;
+    border-radius:30px;
+    margin-right:11px;
+    padding:10px;
+    margin-top:15px;
 }

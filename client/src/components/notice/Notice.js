@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { GetNotice } from "./GetNotice";
 import "./Notice.css";
 import axios from "axios";
@@ -6,20 +7,46 @@ import axios from "axios";
 export const Notice = () => {
   const [toggle, setToggle] = React.useState(false);
   const [notice, setNotice] = React.useState([]);
+  const [newNotice, setNewNotice] = React.useState();
   const toggleNotice = () => {
     if (!toggle) {
+      toast("Getting Posts !!");
       setToggle(!toggle);
-      axios.get("http://localhost:5000/api/notice").then((response) => {
-        console.log(response.data.notices);
-        setNotice(response.data.notices);
-      });
+      axios
+        .get("http://localhost:5000/api/notice")
+        .then((response) => {
+          console.log(response.data.notices);
+          setNotice(response.data.notices);
+        })
+        .catch((error) => {
+          toast("Connect Failed !!");
+          setToggle(!toggle);
+          document.getElementById("notice-container").style.height = "35px";
+          document.getElementById("toggled-content").style.display = "none";
+        });
       document.getElementById("notice-container").style.height = "200px";
       document.getElementById("toggled-content").style.display = "block";
     } else {
       setToggle(!toggle);
-      document.getElementById("notice-container").style.height = "30px";
+      document.getElementById("notice-container").style.height = "35px";
       document.getElementById("toggled-content").style.display = "none";
     }
+  };
+
+  const handleChange = (e) => {
+    setNewNotice(e.target.value);
+  };
+
+  const addNotice = () => {
+    axios
+      .post("http://localhost:5000/api/notice", { notice: newNotice })
+      .then((response) => {
+        toast("Notice Posted Successfully!!");
+        console.log(response.data);
+      })
+      .catch((error) => {
+        toast("Notice Posting failed!!");
+      });
   };
 
   return (
@@ -42,12 +69,19 @@ export const Notice = () => {
         </span>
         {/* //adminonly */}
         <div>
-        <input className="add-notice-input" type="text" placeholder="Enter the content of the notice.."></input>
-        <div className="post-btn">Post</div>
+          <input
+            onChange={handleChange}
+            className="add-notice-input"
+            type="text"
+            placeholder="Enter the content of the notice.."
+          ></input>
+          <div className="post-btn" onClick={addNotice}>
+            Post
+          </div>
         </div>
       </div>
       <div id="toggled-content">
-        <GetNotice notice={notice} setNotice={setNotice}/>
+        <GetNotice notice={notice} setNotice={setNotice} />
       </div>
     </div>
   );

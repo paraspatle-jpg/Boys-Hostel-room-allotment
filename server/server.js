@@ -5,6 +5,8 @@ const cors = require("cors");
 //import routes here routes`
 
 const noticeRoutes = require("./routes/notice");
+const authRoutes = require("./routes/auth");
+const roomAllotRoutes = require("./routes/roomAllot");
 
 const app = express();
 
@@ -24,6 +26,8 @@ app.use(express.json());
 //configure routes  here
 
 app.use("/api", noticeRoutes);
+app.use("/api", authRoutes);
+app.use("/api", roomAllotRoutes);
 
 const PORT = process.env.PORT || 5000;
 const dbURI =

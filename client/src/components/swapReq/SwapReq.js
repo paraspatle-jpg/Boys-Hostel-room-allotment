@@ -1,41 +1,125 @@
 import React from "react";
+import axios from "axios";
+import { ArrowDown } from "../arrowDown/ArrowDown";
+import { ToastContainer, toast } from "react-toastify";
 import "./SwapReq.css";
 
-export const SwapReq = () => {
+export const SwapReq = (props) => {
   const [toggle, setToggle] = React.useState(false);
-  const toggleNotice = () => {
+  const [swap, setSwap] = React.useState([]);
+
+  const expand = () => {
+    document.getElementById("swapreq-container").style.height = "200px";
+    document.getElementById("toggled-swapreq-content").style.display = "block";
+  };
+  const shrink = () => {
+    document.getElementById("swapreq-container").style.height = "30px";
+    document.getElementById("toggled-swapreq-content").style.display = "none";
+  };
+
+  const toggleSwap = () => {
     if (!toggle) {
       setToggle(!toggle);
-      document.getElementById("swapreq-container").style.height = "100px";
-      document.getElementById("toggled-swapreq-content").style.display = "block";
+      if (props.user.user.admin === false) {
+        axios
+          .get(
+            `http://localhost:5000/api/swaprequests/${props.user.user.roomNumber}`
+          )
+          .then((response) => {
+            setSwap(response.data);
+            expand();
+          })
+          .catch((error) => {
+            toast.warning("Connect Failed !!");
+            shrink();
+          });
+      } else {
+        axios
+          .get(`http://localhost:5000/api/pendingswap`, {
+            headers: { Authorization: "Bearer " + props.user.token },
+          })
+          .then((response) => {
+            setSwap(response.data);
+            expand();
+          })
+          .catch((error) => {
+            toast.warning("Connect Failed !!");
+            shrink();
+          });
+      }
     } else {
       setToggle(!toggle);
-      document.getElementById("swapreq-container").style.height = "30px";
-      document.getElementById("toggled-swapreq-content").style.display = "none";
+      shrink();
     }
   };
+
+  const swapRequest = (roomNo) => {
+    axios
+      .post(`http://localhost:5000/api/acceptswap/${roomNo}`, {
+        headers: { Authorization: "Bearer " + props.user.token },
+      })
+      .then((response) => {
+        toast.success("Swap Accepted...Will be Approved Soon");
+      });
+  };
+
+  const approveSwap = (users) => {
+    axios.post(
+      `http://localhost:5000/api/approveswap`,
+      {
+        user1: users.user1,
+        user2: users.user2,
+      },
+      {
+        headers: { Authorization: "Bearer " + props.user.token },
+      }
+    ).then((response) => {
+      console.log(response.data);
+    })
+  };
+
   return (
     <div className="swapreq-container" id="swapreq-container">
       <div className="visible-swap-req-content">
-        <span onClick={toggleNotice}>
+        <span onClick={toggleSwap}>
           Swap Requests &nbsp;
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M15.707 4.293a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L10 8.586l4.293-4.293a1 1 0 011.414 0zm0 6a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L10 14.586l4.293-4.293a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
+          <ArrowDown />
         </span>
       </div>
       <div id="toggled-swapreq-content">
-        Lorem ipsum dolor sit amet, congue<br></br>Paras
+        {swap.map((swapReq) => {
+          return (
+            <>
+              {props.user.user.admin === false ? (
+                <div className="toggled-swapreq-flex">
+                  <div>{swapReq.name}</div>
+                  <div>{swapReq.roomNumber}</div>
+                  <div
+                    className="accept-swap-btn"
+                    onClick={() => swapRequest(swapReq.roomNumber)}
+                  >
+                    Accept Swap
+                  </div>
+                </div>
+              ) : (
+                <div className="toggled-swapreq-flex">
+                  <div>{swapReq.user1.name}</div>
+                  <div>{swapReq.user1.roomNumber}</div>
+                  <div>{swapReq.user2.name}</div>
+                  <div>{swapReq.user2.roomNumber}</div>
+                  <div
+                    className="accept-swap-btn"
+                    onClick={() => approveSwap(swapReq)}
+                  >
+                    Approve Swap
+                  </div>
+                </div>
+              )}
+            </>
+          );
+        })}
       </div>
+      <ToastContainer />
     </div>
   );
 };

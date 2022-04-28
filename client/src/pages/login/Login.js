@@ -1,8 +1,12 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { Navigate } from "react-router";
 import "./Login.css";
+import { ToastContainer, toast } from "react-toastify";
 
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("user"));
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -15,12 +19,25 @@ export const Login = () => {
     });
   };
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    axios
+      .post("http://localhost:5000/api/login", user)
+      .then((response) => {
+        console.log(response.data);
+        toast("Logged In sucessfully!");
+        localStorage.setItem("user", JSON.stringify(response.data));
+        setIsLogin(localStorage.getItem("user"));
+      })
+      .catch((error) => {
+        toast("Login Failed!");
+      });
+  };
+  if (isLogin) return <Navigate to="/" />;
   return (
     <>
       <div className="login-container">
-      <div className="header-container">Login</div>
-      <div className="welcome-message">Welocme, Please Login Here...</div>
+        <div className="header-container">Login</div>
+        <div className="welcome-message">Welocme, Please Login Here...</div>
         <div className="login-form-container">
           <input
             onChange={handleChange}
@@ -41,6 +58,7 @@ export const Login = () => {
           </span>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
