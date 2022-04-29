@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 
-export const GetNotice = ({ notice, setNotice }) => {
+export const GetNotice = ({ notice, setNotice, user }) => {
   const handleDelete = (id) => {
     axios.delete(`http://localhost:5000/api/notice/${id}`).then((response) => {
       console.log(response.data);
@@ -16,15 +16,17 @@ export const GetNotice = ({ notice, setNotice }) => {
     return (
       <div className="paras">
         <div>{notices.notice}</div>
-        <div
-          className="delete-btn"
-          onClick={() => {
-            handleDelete(notices._id);
-          }}
-        >
-          Delete
-        </div>
+        {user.user.admin === true ? (
+          <div
+            className="delete-btn"
+            onClick={() => {
+              handleDelete(notices._id);
+            }}
+          >
+            Delete
+          </div>
+        ) : null}
       </div>
     );
-  })
+  });
 };

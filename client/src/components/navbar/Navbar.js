@@ -1,10 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import profile from "../image/profile.jpg";
+import axios from "axios";
 import "./Navbar.css";
 
-export const Navbar = () => {
-  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem("user")));
+export const Navbar = (props) => {
+  const [user, setUser] = React.useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
+
+  const logout = () => {
+    localStorage.removeItem("user");
+  };
+
   return (
     <div className="navbar-container">
       <div className="navbar-flex-box-container">
@@ -12,8 +20,9 @@ export const Navbar = () => {
           <div>
             <img src={profile} alt="profile"></img>
           </div>
-          {user?<span className="roll-number">{user.user.rollno}</span>:null}
-          
+          {user ? (
+            <span className="roll-number">{user.user.rollno}</span>
+          ) : null}
         </div>
         <ul className="navbar-list">
           <li>
@@ -43,6 +52,17 @@ export const Navbar = () => {
             </Link>
           </li>
 
+          {user ? (
+            <li>
+              <Link
+                style={{ textDecoration: "none", color: "#fff" }}
+                onClick={logout}
+                to="/login"
+              >
+              Logout
+              </Link>
+            </li>
+          ) : null}
         </ul>
       </div>
     </div>

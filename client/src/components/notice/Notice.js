@@ -4,22 +4,21 @@ import { GetNotice } from "./GetNotice";
 import "./Notice.css";
 import axios from "axios";
 
-export const Notice = () => {
+export const Notice = (props) => {
   const [toggle, setToggle] = React.useState(false);
   const [notice, setNotice] = React.useState([]);
   const [newNotice, setNewNotice] = React.useState();
   const toggleNotice = () => {
     if (!toggle) {
-      toast("Getting Posts !!");
+      toast.info("Getting Posts !!");
       setToggle(!toggle);
       axios
         .get("http://localhost:5000/api/notice")
         .then((response) => {
-          console.log(response.data.notices);
           setNotice(response.data.notices);
         })
         .catch((error) => {
-          toast("Connect Failed !!");
+          toast.warning("Connect Failed !!");
           setToggle(!toggle);
           document.getElementById("notice-container").style.height = "35px";
           document.getElementById("toggled-content").style.display = "none";
@@ -41,11 +40,11 @@ export const Notice = () => {
     axios
       .post("http://localhost:5000/api/notice", { notice: newNotice })
       .then((response) => {
-        toast("Notice Posted Successfully!!");
+        toast.success("Notice Posted Successfully!!");
         console.log(response.data);
       })
       .catch((error) => {
-        toast("Notice Posting failed!!");
+        toast.error("Notice Posting failed!!");
       });
   };
 
@@ -67,8 +66,7 @@ export const Notice = () => {
             />
           </svg>
         </span>
-        {/* //adminonly */}
-        <div>
+        {props.user.user.admin === true ?(<div>
           <input
             onChange={handleChange}
             className="add-notice-input"
@@ -78,10 +76,11 @@ export const Notice = () => {
           <div className="post-btn" onClick={addNotice}>
             Post
           </div>
-        </div>
+        </div>):null}
+        
       </div>
       <div id="toggled-content">
-        <GetNotice notice={notice} setNotice={setNotice} />
+        <GetNotice notice={notice} user={props.user} setNotice={setNotice} />
       </div>
     </div>
   );

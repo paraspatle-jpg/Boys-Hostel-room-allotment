@@ -69,7 +69,10 @@
     display: none;
     margin-top:20px;
 }
-
+.overflow-container{
+    height:120px;
+    overflow: auto;
+}
 .getRoomOwners-flex-container{
     display: flex;
     font-weight:normal;
@@ -87,7 +90,7 @@
 
 .room-space-left-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     font-weight:normal;
     font-size:18px;
 }
@@ -100,5 +103,5 @@
     border-radius:30px;
     margin-right:11px;
     padding:10px;
-    margin-top:15px;
+    margin-top:10px;
 }

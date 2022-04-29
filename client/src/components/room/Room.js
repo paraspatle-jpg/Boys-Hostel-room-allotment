@@ -10,7 +10,7 @@ export const Room = ({ block, setOwners, setRoomSpace }) => {
       .get(`http://localhost:5000/api/getroominfo/${block.roomNo}`)
       .then((response) => {
         setOwners(response.data);
-        document.getElementById("room-choosing-heading").style.height = "200px";
+        document.getElementById("room-choosing-heading").style.height = "220px";
         document.getElementById("room-choosing-toggled-content").style.display =
           "block";
       })

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Navigate } from "react-router";
+import { Navbar } from "../../components/navbar/Navbar";
 import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -35,6 +36,9 @@ export const Login = () => {
   if (isLogin) return <Navigate to="/" />;
   return (
     <>
+    <div className="app-flex-container">
+      <Navbar />
+      <div className="body-container">
       <div className="login-container">
         <div className="header-container">Login</div>
         <div className="welcome-message">Welocme, Please Login Here...</div>
@@ -57,6 +61,8 @@ export const Login = () => {
             Submit
           </span>
         </div>
+      </div>
+      </div>
       </div>
       <ToastContainer />
     </>

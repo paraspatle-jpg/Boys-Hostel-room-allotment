@@ -11,7 +11,7 @@ export const RoomChoosing = (props) => {
     [
       { roomSpace: 0 },
       { roomSpace: 3, roomNo: 301 },
-      { roomSpace: 3, roomNo: 302 },
+      { roomSpace: 2, roomNo: 302 },
       { roomSpace: 3, roomNo: 303 },
       { roomSpace: 3, roomNo: 304 },
       { roomSpace: 3, roomNo: 305 },
@@ -73,16 +73,25 @@ export const RoomChoosing = (props) => {
   const [owners, setOwners] = React.useState();
   const [roomSpace, setRoomSpace] = React.useState();
 
-  const getARoom = (roomNo) =>{
+  const getARoom = (roomNo) => {
     console.log(roomSpace);
-    axios.post(`http://localhost:5000/api/roomallotment/${roomNo}`, {
-      headers: { Authorization: "Bearer " + props.user.token },
-    }).then((response)=>{
-      toast.success("Room Allotted Successfully!!")
-    }).catch((error)=>{
-      toast.warning("Loading Failed...");
-    })
-  }
+    axios
+      .post(`http://localhost:5000/api/roomallotment/${roomNo}`, {
+        headers: { Authorization: "Bearer " + props.user.token },
+      })
+      .then((response) => {
+        toast.success("Room Allotted Successfully!!");
+        document.getElementById("room-choosing-heading").style.height = "30px";
+        document.getElementById("room-choosing-toggled-content").style.display =
+          "none";
+      })
+      .catch((error) => {
+        toast.warning("Loading Failed...");
+        document.getElementById("room-choosing-heading").style.height = "30px";
+        document.getElementById("room-choosing-toggled-content").style.display =
+          "none";
+      });
+  };
 
   return (
     <div className="room-choosing-container">
@@ -94,12 +103,12 @@ export const RoomChoosing = (props) => {
               <GetRoomOwners owners={owners} user={props.user} />
               {roomSpace.roomSpace - owners.length === 0 ? null : (
                 <div className="room-space-left-container">
-                  <div>
-                    {console.log(roomSpace.roomSpace- owners.length)}
-                    There are {roomSpace - owners.length} seats left in this room
-                    click on the get the seat button to grab it.
+                  <div
+                    className="grab-seat-button"
+                    onClick={() => getARoom(roomSpace.roomNo)}
+                  >
+                    Get a Seat
                   </div>
-                  <div className="grab-seat-button" onClick={()=>getARoom(roomSpace.roomNo)}>Get a Seat</div>
                 </div>
               )}
             </>
