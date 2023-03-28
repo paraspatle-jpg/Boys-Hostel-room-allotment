@@ -21,7 +21,7 @@ export const Navbar = (props) => {
             <img src={profile} alt="profile"></img>
           </div>
           {user ? (
-            <span className="roll-number">{user.user.rollno}</span>
+            <span className="roll-number">{user?.user?.rollno}</span>
           ) : null}
         </div>
         <ul className="navbar-list">

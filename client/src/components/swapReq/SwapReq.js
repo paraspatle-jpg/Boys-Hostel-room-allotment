@@ -75,6 +75,10 @@ export const SwapReq = (props) => {
       }
     ).then((response) => {
       console.log(response.data);
+      toast.success("Swap Approved!!");
+      shrink();
+    }).catch((error) => {
+      toast.error("Connection Failed !");
     })
   };
 

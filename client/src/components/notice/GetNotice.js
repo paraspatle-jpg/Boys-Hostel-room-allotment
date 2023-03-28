@@ -7,7 +7,7 @@ export const GetNotice = ({ notice, setNotice, user }) => {
       console.log(response.data);
       axios.get("http://localhost:5000/api/notice").then((res) => {
         console.log(res.data.notices);
-        setNotice(res.data.notices);
+        setNotice(res?.data?.notices);
       });
     });
   };
@@ -16,11 +16,11 @@ export const GetNotice = ({ notice, setNotice, user }) => {
     return (
       <div className="paras">
         <div>{notices.notice}</div>
-        {user.user.admin === true ? (
+        {user?.user?.admin === true ? (
           <div
             className="delete-btn"
             onClick={() => {
-              handleDelete(notices._id);
+              handleDelete(notices?._id);
             }}
           >
             Delete

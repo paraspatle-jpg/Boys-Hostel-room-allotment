@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Navbar } from "../../components/navbar/Navbar";
+import { Navigate } from "react-router";
+import axios from "axios";
+import {toast } from "react-toastify";
 
 export const AdminLogin = () => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("user"));
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -15,7 +19,20 @@ export const AdminLogin = () => {
     });
   };
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    axios
+      .post("http://localhost:5000/api/login", user)
+      .then((response) => {
+        console.log(response.data);
+        toast("Logged In sucessfully!");
+        localStorage.setItem("user", JSON.stringify(response.data));
+        setIsLogin(localStorage.getItem("user"));
+      })
+      .catch((error) => {
+        toast("Login Failed!");
+      });
+  };
+  if (isLogin) return <Navigate to="/" />;
   return (
     <>
       <div className="app-flex-container">

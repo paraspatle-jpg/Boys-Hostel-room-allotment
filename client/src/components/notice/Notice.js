@@ -15,7 +15,7 @@ export const Notice = (props) => {
       axios
         .get("http://localhost:5000/api/notice")
         .then((response) => {
-          setNotice(response.data.notices);
+          setNotice(response?.data?.notices);
         })
         .catch((error) => {
           toast.warning("Connect Failed !!");
@@ -41,7 +41,7 @@ export const Notice = (props) => {
       .post("http://localhost:5000/api/notice", { notice: newNotice })
       .then((response) => {
         toast.success("Notice Posted Successfully!!");
-        console.log(response.data);
+        console.log(response?.data);
       })
       .catch((error) => {
         toast.error("Notice Posting failed!!");
@@ -66,7 +66,7 @@ export const Notice = (props) => {
             />
           </svg>
         </span>
-        {props.user.user.admin === true ?(<div>
+        {props?.user?.user?.admin === true ?(<div>
           <input
             onChange={handleChange}
             className="add-notice-input"
@@ -80,7 +80,7 @@ export const Notice = (props) => {
         
       </div>
       <div id="toggled-content">
-        <GetNotice notice={notice} user={props.user} setNotice={setNotice} />
+        <GetNotice notice={notice} user={props?.user} setNotice={setNotice} />
       </div>
     </div>
   );
